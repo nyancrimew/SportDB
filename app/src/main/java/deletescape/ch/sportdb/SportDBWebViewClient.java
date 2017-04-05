@@ -21,6 +21,8 @@ public class SportDBWebViewClient extends WebViewClient {
     public void onPageFinished(final WebView view, String url) {
         super.onPageFinished(view, url);
         view.evaluateJavascript("$('.ui-header').hide()", null);
+        view.evaluateJavascript("var element = document.getElementsByClassName('main')[0]; element.parentNode.removeChild(element);", null);
+        view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
         if (url.endsWith("#activity")) {
             ValueCallback<String> titleCallback = new ValueCallback<String>() {
                 @Override
