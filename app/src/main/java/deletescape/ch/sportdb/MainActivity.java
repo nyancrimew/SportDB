@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         webView = (WebView) findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient());
+        WebViewClient client = new SportDBWebViewClient();
+        webView.setWebViewClient(client);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl("https://www.sportdb.ch/extranet/mobile/mobileAwk.do");
     }
 
