@@ -65,7 +65,6 @@ public class SportDBWebViewClient extends WebViewClient {
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
         view.evaluateJavascript("$('*').css('font-family','sans-serif')", null);
         view.evaluateJavascript("$('*').css('text-shadow','none')", null);
-        view.evaluateJavascript("$('.ui-icon-group').hide()", null);
     }
 
     public void setOnTitleListener(OnTitleListener listener) {
