@@ -23,7 +23,6 @@ public class SportDBWebViewClient extends WebViewClient {
         super.onPageFinished(view, url);
         view.evaluateJavascript("$('.ui-header').hide()", null);
         view.evaluateJavascript("var element = document.getElementsByClassName('main')[0]; element.parentNode.removeChild(element);", null);
-        view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
         if (url.endsWith("#activity")) {
             ValueCallback<String> titleCallback = new ValueCallback<String>() {
                 @Override
@@ -52,6 +51,7 @@ public class SportDBWebViewClient extends WebViewClient {
                 onSubTitleListener.onSubTitle("");
             }
         }
+        applyStyle(view);
     }
     private String trimOneChar(String string){
         return string.substring(1, string.length() - 1);
@@ -59,6 +59,13 @@ public class SportDBWebViewClient extends WebViewClient {
     @Override
     public void onLoadResource(WebView view, String url) {
         super.onLoadResource(view, url);
+    }
+
+    private void applyStyle(WebView view){
+        view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
+        view.evaluateJavascript("$('*').css('font-family','sans-serif')", null);
+        view.evaluateJavascript("$('*').css('text-shadow','none')", null);
+        view.evaluateJavascript("$('.ui-icon-group').hide()", null);
     }
 
     public void setOnTitleListener(OnTitleListener listener) {
