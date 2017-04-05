@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 public class SportDBWebViewClient extends WebViewClient {
     private OnTitleListener onTitleListener;
     private OnSubTitleListener onSubTitleListener;
+    private OnActivityListener onActivityListener;
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -42,6 +43,7 @@ public class SportDBWebViewClient extends WebViewClient {
             };
             view.evaluateJavascript("$('#activity-title').text()", titleCallback);
             view.evaluateJavascript("$('#activity-subtitle').text()", subtitleCallback);
+            onActivityListener.onActivity();
         } else{
             if(onTitleListener != null){
                 onTitleListener.onTitle(view.getTitle());
@@ -65,11 +67,17 @@ public class SportDBWebViewClient extends WebViewClient {
     public void setOnSubTitleListener(OnSubTitleListener listener) {
         onSubTitleListener = listener;
     }
+    public void setOnActivityListener(OnActivityListener listener){
+        onActivityListener = listener;
+    }
 
     interface OnTitleListener {
         void onTitle(String title);
     }
     interface OnSubTitleListener {
         void onSubTitle(String subtitle);
+    }
+    interface OnActivityListener {
+        void onActivity();
     }
 }
