@@ -1,5 +1,6 @@
 package deletescape.ch.sportdb;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -9,6 +10,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://www.sportdb.ch/extranet/mobile/mobileAwk.do");
     }
 
