@@ -3,9 +3,9 @@ package deletescape.ch.sportdb;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
@@ -16,8 +16,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         webView = (WebView) findViewById(R.id.webview);
-        WebViewClient client = new SportDBWebViewClient();
+        SportDBWebViewClient client = new SportDBWebViewClient();
+
+        client.setOnTitleListener(new SportDBWebViewClient.OnTitleListener() {
+            @Override
+            public void onTitle(String title) {
+                toolbar.setTitle(title);
+            }
+        });
+        client.setOnSubTitleListener(new SportDBWebViewClient.OnSubTitleListener() {
+            @Override
+            public void onSubTitle(String subtitle) {
+                toolbar.setSubtitle(subtitle);
+            }
+        });
+
         webView.setWebViewClient(client);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
