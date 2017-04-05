@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
         webView = (WebView) findViewById(R.id.webview);
         SportDBWebViewClient client = new SportDBWebViewClient();
