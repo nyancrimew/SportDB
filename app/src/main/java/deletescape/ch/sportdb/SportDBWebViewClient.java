@@ -78,6 +78,7 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
         view.evaluateJavascript("$('.ui-alt-icon.ui-btn').css('background-color', '#fff')", null);
         view.evaluateJavascript("$('.ui-btn.ui-btn-b').css('background-color', '#fff')", null);
         view.evaluateJavascript("$('.ui-bar-b').css('background-color', '#4CAF50')", null);
+        view.evaluateJavascript("$('.ui-bar-b').css('color', '#fff')", null);
         view.evaluateJavascript("$('.ui-bar-b').css('border', 'none')", null);
         view.evaluateJavascript("$('#endOfList').remove()", null);
     }
