@@ -65,11 +65,21 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
     private void applyStyle(WebView view){
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
         applyWildcardStyle(view);
+        applyOtherStyles(view);
     }
 
     private void applyWildcardStyle(WebView view) {
         view.evaluateJavascript("$('*').css('font-family','sans-serif')", null);
         view.evaluateJavascript("$('*').css('text-shadow','none')", null);
+        view.evaluateJavascript("$('*').css('color', '#000')", null);
+    }
+
+    private void applyOtherStyles(WebView view) {
+        view.evaluateJavascript("$('.ui-alt-icon.ui-btn').css('background-color', '#fff')", null);
+        view.evaluateJavascript("$('.ui-btn.ui-btn-b').css('background-color', '#fff')", null);
+        view.evaluateJavascript("$('.ui-bar-b').css('background-color', '#4CAF50')", null);
+        view.evaluateJavascript("$('.ui-bar-b').css('border', 'none')", null);
+        view.evaluateJavascript("$('#endOfList').remove()", null);
     }
 
     public void setOnTitleListener(OnTitleListener listener) {
@@ -86,6 +96,7 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
     public void onScrollChange(SportDBWebView v, int l, int t, int oldl, int oldt) {
         if(t > oldt){
             applyWildcardStyle(v);
+            applyOtherStyles(v);
         }
     }
 
