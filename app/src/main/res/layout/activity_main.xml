@@ -17,7 +17,7 @@
         app:subtitleTextColor="@android:color/white"
         android:background="@color/colorPrimary"/>
 
-    <WebView
+    <deletescape.ch.sportdb.SportDBWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

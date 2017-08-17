@@ -5,7 +5,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class SportDBWebViewClient extends WebViewClient {
+public class SportDBWebViewClient extends WebViewClient implements SportDBWebView.OnScrollChangeListener{
     private OnTitleListener onTitleListener;
     private OnSubTitleListener onSubTitleListener;
     private OnActivityListener onActivityListener;
@@ -52,6 +52,7 @@ public class SportDBWebViewClient extends WebViewClient {
             }
         }
         applyStyle(view);
+        ((SportDBWebView) view).setOnScrollChangeListener(this);
     }
     private String trimOneChar(String string){
         return string.substring(1, string.length() - 1);
@@ -63,6 +64,10 @@ public class SportDBWebViewClient extends WebViewClient {
 
     private void applyStyle(WebView view){
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
+        applyWildcardStyle(view);
+    }
+
+    private void applyWildcardStyle(WebView view) {
         view.evaluateJavascript("$('*').css('font-family','sans-serif')", null);
         view.evaluateJavascript("$('*').css('text-shadow','none')", null);
     }
@@ -75,6 +80,13 @@ public class SportDBWebViewClient extends WebViewClient {
     }
     public void setOnActivityListener(OnActivityListener listener){
         onActivityListener = listener;
+    }
+
+    @Override
+    public void onScrollChange(SportDBWebView v, int l, int t, int oldl, int oldt) {
+        if(t > oldt){
+            applyWildcardStyle(v);
+        }
     }
 
     interface OnTitleListener {

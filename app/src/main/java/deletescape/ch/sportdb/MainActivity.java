@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 import android.webkit.WebView;
 
 public class MainActivity extends AppCompatActivity {
-    private WebView webView;
+    private SportDBWebView webView;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
-        webView = (WebView) findViewById(R.id.webview);
+        webView = (SportDBWebView) findViewById(R.id.webview);
         SportDBWebViewClient client = new SportDBWebViewClient();
 
         client.setOnActivityListener(new SportDBWebViewClient.OnActivityListener() {
