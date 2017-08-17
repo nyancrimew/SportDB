@@ -81,6 +81,16 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
         view.evaluateJavascript("$('.ui-bar-b').css('color', '#fff')", null);
         view.evaluateJavascript("$('.ui-bar-b').css('border', 'none')", null);
         view.evaluateJavascript("$('#endOfList').remove()", null);
+        applyGroupIcons(view);
+    }
+
+    private void applyGroupIcons(WebView view) {
+        view.evaluateJavascript("$('.ui-icon-group').css('background-image', 'url(https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_people_black_18px.svg)')", null);
+        view.evaluateJavascript("$('.ui-icon-group').css('background-size', 'contain')", null);
+        view.evaluateJavascript("$('.ui-icon-group').css('background-repeat', 'no-repeat')", null);
+        view.evaluateJavascript("$('.ui-icon-group').css('width', '20px')", null);
+        view.evaluateJavascript("$('.ui-icon-group').css('height', '20px')", null);
+        view.evaluateJavascript("$('.ui-icon-group').css('margin', '6px 10px 0 0')", null);
     }
 
     public void setOnTitleListener(OnTitleListener listener) {
