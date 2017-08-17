@@ -5,7 +5,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class SportDBWebViewClient extends WebViewClient implements SportDBWebView.OnScrollChangeListener{
+public class SportDBWebViewClient extends WebViewClient {
     private OnTitleListener onTitleListener;
     private OnSubTitleListener onSubTitleListener;
     private OnActivityListener onActivityListener;
@@ -52,7 +52,6 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
             }
         }
         applyStyle(view);
-        ((SportDBWebView) view).setOnScrollChangeListener(this);
     }
     private String trimOneChar(String string){
         return string.substring(1, string.length() - 1);
@@ -65,23 +64,8 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
     private void applyStyle(WebView view){
         loadNativeDroid(view);
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
-        view.evaluateJavascript("document.styleSheets[0].addRule('.ui-checkbox-off::after', 'background: none !important', 1)", null);
-        view.evaluateJavascript("document.styleSheets[0].addRule('.ui-checkbox-on::after', 'background: none !important', 1)", null);
-        applyOtherStyles(view);
-    }
-
-    private void applyOtherStyles(WebView view) {
-        view.evaluateJavascript("$('#endOfList').remove()", null);
-        applyGroupIcons(view);
-    }
-
-    private void applyGroupIcons(WebView view) {
-        view.evaluateJavascript("$('.ui-icon-group').css('background-image', 'url(https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_people_black_18px.svg)')", null);
-        view.evaluateJavascript("$('.ui-icon-group').css('background-size', 'contain')", null);
-        view.evaluateJavascript("$('.ui-icon-group').css('background-repeat', 'no-repeat')", null);
-        view.evaluateJavascript("$('.ui-icon-group').css('width', '20px')", null);
-        view.evaluateJavascript("$('.ui-icon-group').css('height', '20px')", null);
-        view.evaluateJavascript("$('.ui-icon-group').css('margin', '6px 10px 0 0')", null);
+        view.evaluateJavascript("document.styleSheets[0].disabled = true", null);
+        view.evaluateJavascript("document.styleSheets[3].disabled = true", null);
     }
 
     public void setOnTitleListener(OnTitleListener listener) {
@@ -94,21 +78,13 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
         onActivityListener = listener;
     }
 
-    @Override
-    public void onScrollChange(SportDBWebView v, int l, int t, int oldl, int oldt) {
-        if(t > oldt){
-            applyOtherStyles(v);
-        }
-    }
-
     public void loadNativeDroid(WebView view){
         String loadCSS = "var fileref=document.createElement('link')\n" +
                 "fileref.setAttribute('rel', 'stylesheet')\n" +
                 "fileref.setAttribute('type', 'text/css')\n" +
                 "fileref.setAttribute('href', %s)\n" +
                 "document.getElementsByTagName('head')[0].appendChild(fileref)";
-        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/wildhaber/nativeDroid2/1c2bb6ec/css/nativedroid2.css'"), null);
-        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/wildhaber/nativeDroid2/1c2bb6ec/css/nativedroid2.color.green.css'"), null);
+        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/deletescape/nativeDroid2/ac278f66/css/nativedroid2.css'"), null);
     }
 
     interface OnTitleListener {
