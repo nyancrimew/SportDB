@@ -63,23 +63,14 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
     }
 
     private void applyStyle(WebView view){
+        loadNativeDroid(view);
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
-        applyWildcardStyle(view);
+        view.evaluateJavascript("document.styleSheets[0].addRule('.ui-checkbox-off::after', 'background: none !important', 1)", null);
+        view.evaluateJavascript("document.styleSheets[0].addRule('.ui-checkbox-on::after', 'background: none !important', 1)", null);
         applyOtherStyles(view);
     }
 
-    private void applyWildcardStyle(WebView view) {
-        view.evaluateJavascript("$('*').css('font-family','sans-serif')", null);
-        view.evaluateJavascript("$('*').css('text-shadow','none')", null);
-        view.evaluateJavascript("$('*').css('color', '#000')", null);
-    }
-
     private void applyOtherStyles(WebView view) {
-        view.evaluateJavascript("$('.ui-alt-icon.ui-btn').css('background-color', '#fff')", null);
-        view.evaluateJavascript("$('.ui-btn.ui-btn-b').css('background-color', '#fff')", null);
-        view.evaluateJavascript("$('.ui-bar-b').css('background-color', '#4CAF50')", null);
-        view.evaluateJavascript("$('.ui-bar-b').css('color', '#fff')", null);
-        view.evaluateJavascript("$('.ui-bar-b').css('border', 'none')", null);
         view.evaluateJavascript("$('#endOfList').remove()", null);
         applyGroupIcons(view);
     }
@@ -106,9 +97,18 @@ public class SportDBWebViewClient extends WebViewClient implements SportDBWebVie
     @Override
     public void onScrollChange(SportDBWebView v, int l, int t, int oldl, int oldt) {
         if(t > oldt){
-            applyWildcardStyle(v);
             applyOtherStyles(v);
         }
+    }
+
+    public void loadNativeDroid(WebView view){
+        String loadCSS = "var fileref=document.createElement('link')\n" +
+                "fileref.setAttribute('rel', 'stylesheet')\n" +
+                "fileref.setAttribute('type', 'text/css')\n" +
+                "fileref.setAttribute('href', %s)\n" +
+                "document.getElementsByTagName('head')[0].appendChild(fileref)";
+        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/wildhaber/nativeDroid2/1c2bb6ec/css/nativedroid2.css'"), null);
+        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/wildhaber/nativeDroid2/1c2bb6ec/css/nativedroid2.color.green.css'"), null);
     }
 
     interface OnTitleListener {
