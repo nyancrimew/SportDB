@@ -17,17 +17,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
-        webView = (WebView) findViewById(R.id.webview);
+        webView = findViewById(R.id.webview);
         SportDBWebViewClient client = new SportDBWebViewClient();
 
         client.setOnActivityListener(new SportDBWebViewClient.OnActivityListener() {
             @Override
             public void onActivity() {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                setDisplayHomeAsUp(true);
             }
         });
         client.setOnTitleListener(new SportDBWebViewClient.OnTitleListener() {
@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        if(webView.canGoBack()){
+        if (webView.canGoBack()) {
             webView.goBack();
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            setDisplayHomeAsUp(false);
             return true;
         }
         return super.onSupportNavigateUp();
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
             if (webView.canGoBack()) {
-                if(webView.getUrl().endsWith("#activity")){
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                if (webView.getUrl().endsWith("#activity")) {
+                    setDisplayHomeAsUp(false);
                 }
                 webView.goBack();
             } else {
@@ -73,5 +73,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void setDisplayHomeAsUp(boolean enabled) {
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(enabled);
+        }
     }
 }

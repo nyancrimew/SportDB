@@ -27,7 +27,7 @@ public class SportDBWebViewClient extends WebViewClient {
             ValueCallback<String> titleCallback = new ValueCallback<String>() {
                 @Override
                 public void onReceiveValue(String value) {
-                    if(onTitleListener != null){
+                    if (onTitleListener != null) {
                         onTitleListener.onTitle(trimOneChar(value));
                     }
                 }
@@ -35,7 +35,7 @@ public class SportDBWebViewClient extends WebViewClient {
             ValueCallback<String> subtitleCallback = new ValueCallback<String>() {
                 @Override
                 public void onReceiveValue(String value) {
-                    if(onSubTitleListener != null){
+                    if (onSubTitleListener != null) {
                         onSubTitleListener.onSubTitle(trimOneChar(value));
                     }
                 }
@@ -43,42 +43,46 @@ public class SportDBWebViewClient extends WebViewClient {
             view.evaluateJavascript("$('#activity-title').text()", titleCallback);
             view.evaluateJavascript("$('#activity-subtitle').text()", subtitleCallback);
             onActivityListener.onActivity();
-        } else{
-            if(onTitleListener != null){
+        } else {
+            if (onTitleListener != null) {
                 onTitleListener.onTitle(view.getTitle());
             }
-            if(onSubTitleListener != null){
+            if (onSubTitleListener != null) {
                 onSubTitleListener.onSubTitle("");
             }
         }
         applyStyle(view);
     }
-    private String trimOneChar(String string){
+
+    private String trimOneChar(String string) {
         return string.substring(1, string.length() - 1);
     }
+
     @Override
     public void onLoadResource(WebView view, String url) {
         super.onLoadResource(view, url);
     }
 
-    private void applyStyle(WebView view){
+    private void applyStyle(WebView view) {
         loadNativeDroid(view);
         view.evaluateJavascript("document.getElementsByTagName('body')[0].style.height = 'auto'", null);
         view.evaluateJavascript("document.styleSheets[0].disabled = true", null);
         view.evaluateJavascript("document.styleSheets[3].disabled = true", null);
     }
 
-    public void setOnTitleListener(OnTitleListener listener) {
+    void setOnTitleListener(OnTitleListener listener) {
         onTitleListener = listener;
     }
-    public void setOnSubTitleListener(OnSubTitleListener listener) {
+
+    void setOnSubTitleListener(OnSubTitleListener listener) {
         onSubTitleListener = listener;
     }
-    public void setOnActivityListener(OnActivityListener listener){
+
+    void setOnActivityListener(OnActivityListener listener) {
         onActivityListener = listener;
     }
 
-    public void loadNativeDroid(WebView view){
+    private void loadNativeDroid(WebView view) {
         String loadCSS = "var fileref=document.createElement('link')\n" +
                 "fileref.setAttribute('rel', 'stylesheet')\n" +
                 "fileref.setAttribute('type', 'text/css')\n" +
@@ -90,9 +94,11 @@ public class SportDBWebViewClient extends WebViewClient {
     interface OnTitleListener {
         void onTitle(String title);
     }
+
     interface OnSubTitleListener {
         void onSubTitle(String subtitle);
     }
+
     interface OnActivityListener {
         void onActivity();
     }
