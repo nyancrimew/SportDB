@@ -88,7 +88,7 @@ public class SportDBWebViewClient extends WebViewClient {
                 "fileref.setAttribute('type', 'text/css')\n" +
                 "fileref.setAttribute('href', %s)\n" +
                 "document.getElementsByTagName('head')[0].appendChild(fileref)";
-        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/deletescape/nativeDroid2/ac278f66/css/nativedroid2.css'"), null);
+        view.evaluateJavascript(String.format(loadCSS, "'https://cdn.rawgit.com/deletescape/nativeDroid2/8000fb4b/css/nativedroid2.css'"), null);
     }
 
     interface OnTitleListener {

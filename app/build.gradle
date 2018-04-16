@@ -7,8 +7,8 @@ android {
         applicationId "deletescape.ch.sportdb"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 8
-        versionName "2.0.1"
+        versionCode 9
+        versionName "2.0.2"
     }
     buildTypes {
         release {
