@@ -1,8 +1,12 @@
 package deletescape.ch.sportdb;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -47,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl("https://www.sportdb.ch/extranet/mobile/mobileAwk.do");
+
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        if(!prefs.getBoolean("disclaimer_shown", false) || BuildConfig.DEBUG){
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.disclaimer_title)
+                    .setMessage(R.string.disclaimer_body)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+            prefs.edit().putBoolean("disclaimer_show", true).apply();
+        }
     }
 
     @Override

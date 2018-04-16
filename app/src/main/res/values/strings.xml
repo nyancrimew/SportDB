@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SportDB</string>
+    <string name="disclaimer_title">Achtung</string>
+    <string name="ok">@android:string/ok</string>
+    <string name="disclaimer_body">\'Swiss SportDB\' ist eine <b>unabhängig vom BASPO und J+S entwickelte</b> App. Sie bietet lediglich vereinfachten Zugriff auf gewisse Dienste der genannten Parteien. Der vollständige Quellcode der App kann <a href="https://github.com/deletescape/sportdb">hier eingesehen werden</a>.\n\nBei allfälligen Fragen, Bedenken sowie auch Anforderungen wenden Sie sich bitte an:\n<b>Till Kottmann\n<a href="mailto:swiss-sportdb@deletescape.ch">swiss-sportdb@deletescape.ch</a></b>\n\n<i>Dieser Hinweis wird bei zukünfigen Starts der App automatisch ausgeblendet.</i></string>
 </resources>
