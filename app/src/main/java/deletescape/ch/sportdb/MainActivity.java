@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage(R.string.disclaimer_body)
                     .setPositiveButton(R.string.ok, null)
                     .show();
-            prefs.edit().putBoolean("disclaimer_show", true).apply();
+            prefs.edit().putBoolean("disclaimer_shown", true).apply();
         }
     }
 
