@@ -5,6 +5,8 @@ import android.webkit.ValueCallback
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import android.net.http.SslError
+import android.webkit.SslErrorHandler
 
 class SportDBWebViewClient : WebViewClient() {
     var onTitleListener: (String) -> Unit = {}
@@ -40,6 +42,11 @@ class SportDBWebViewClient : WebViewClient() {
                 onSubTitleListener.invoke("")
         }
         applyStyle(view)
+    }
+
+    override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, er: SslError) {
+        // Ignore SSL certificate errors
+        handler.proceed()
     }
 
     private fun trimOneChar(string: String): String {
