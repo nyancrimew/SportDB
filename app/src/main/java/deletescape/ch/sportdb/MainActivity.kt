@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.KeyEvent
 import android.webkit.WebView
 
 class MainActivity : AppCompatActivity() {
@@ -53,19 +52,15 @@ class MainActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-            if (webView!!.canGoBack()) {
-                if (webView!!.url.endsWith("#activity")) {
-                    setDisplayHomeAsUp(false)
-                }
-                webView!!.goBack()
-            } else {
-                finish()
+    override fun onBackPressed() {
+        if (webView!!.canGoBack()) {
+            if (webView!!.url.endsWith("#activity")) {
+                setDisplayHomeAsUp(false)
             }
-            return true
+            webView!!.goBack()
+        } else {
+            finish()
         }
-        return super.onKeyDown(keyCode, event)
     }
 
     private fun setDisplayHomeAsUp(enabled: Boolean) {
